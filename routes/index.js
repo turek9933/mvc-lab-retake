@@ -6,7 +6,7 @@ const addCar = require("../views/add-car");
 const car = require("../views/car");
 
 
-const handleHome = (request, response) => {
+const handleHome = (response) => {
     response.setHeader("Content-Type", "text/html");
     response.write(home.renderPage());
     response.end();
@@ -35,7 +35,7 @@ const handleAddCar = (method, request, response) => {
     }
 };
 
-const handleCar = (request, response) => {
+const handleCar = (response) => {
     const fileName = "formData.json";
     fs.readFile(fileName, (err, data) => {
         response.setHeader("Content-Type", "text/html");
@@ -45,14 +45,14 @@ const handleCar = (request, response) => {
         }
         else {
             const dataFixed = JSON.parse(data);
-            dataToSend = JSON.stringify(dataFixed).replace(/"/g, "").replace(/:/g, ": ").replace(/,/g, "\n").replace(/{/g, "").replace(/}/g, "");
+            dataToSend = JSON.stringify(dataFixed);
         }
         response.write(car.renderPage(dataToSend));
         response.end();
     });
 };
 
-const handlePageNotFound = (request, response) => {
+const handlePageNotFound = (response) => {
     response.statusCode = 404;
     response.setHeader("Content-Type", "text/html");
     response.write("<h1>404 Not Found</h1>");
