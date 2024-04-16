@@ -1,21 +1,22 @@
 const http = require('http');
-const routes = require('./routes/index');
+
+const carsJS = require('./cars');
+const htmlJS = require('./htmlGenerator');
+
 const PORT = 3000;
 
 const requestListener = (req, res) => {
-    if (req.url === '/' && req.method === 'GET') {
-        routes.handleHome(res);
-    }
-    else if (req.url === '/add-car') {
-        routes.handleAddCar(req.method, req, res);
-    }
-    else if (req.url === '/car' && req.method === 'GET') {
-        routes.handleCar(res);
-    }
-    else {
-        routes.handlePageNotFound(res);
-    }
-}
+    const cars = carsJS.getCars();
+    console.log(cars);
+    res.setHeader("Content-Type", "text/html");
+    res.write(htmlJS.getHTMLDocumentStart());
+    res.write('<body>');
+    res.write(`<p>${carsJS.getCarInformation(1)}</p>`);
+    res.write(`<p>${carsJS.getCarAge(1)}</p>`);
+    res.write('</body>');
+    res.write(htmlJS.getHTMLDocumentEnd());
+    res.end();
+};
 
 const server = http.createServer(requestListener);
 
