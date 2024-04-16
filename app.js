@@ -1,3 +1,13 @@
+/*
+Nie mam w informacji zwrotnej do zadania z labolatorium nr 1 oceny, co według posta 'Laboratorium - 1', oznacza ocenę 2.
+Według komentarza w zespole do tego zadania powinienem mieć ocenę 3 (2.75pkt / 6pkt).
+
+Sądzę, że nowszy komentarz jest ważniejszy, ale dla pewności wysyłam poprawę i tego laboratorium.
+*/
+
+const carsJS = require('./cars');
+const htmlJS = require('./htmlGenerator');
+
 const http = require('http');
 
 const carsJS = require('./cars');
